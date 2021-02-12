@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using moment3._2.Data;
 
 namespace moment3._2
 {
@@ -24,6 +26,8 @@ namespace moment3._2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<RecordContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("DefaultDbString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +54,7 @@ namespace moment3._2
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Record}/{action=Index}/{id?}");
             });
         }
     }
