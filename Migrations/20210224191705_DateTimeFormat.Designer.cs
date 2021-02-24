@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using moment3._2.Data;
 
 namespace moment3._2.Migrations
 {
     [DbContext(typeof(RecordContext))]
-    partial class RecordContextModelSnapshot : ModelSnapshot
+    [Migration("20210224191705_DateTimeFormat")]
+    partial class DateTimeFormat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,12 +39,7 @@ namespace moment3._2.Migrations
                     b.Property<DateTime>("RentDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserFK")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserFK");
 
                     b.ToTable("Record");
                 });
@@ -56,28 +53,15 @@ namespace moment3._2.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("RentedRecords")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Surname")
                         .HasColumnType("TEXT");
 
                     b.HasKey("UserId");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("moment3._2.Models.Record", b =>
-                {
-                    b.HasOne("moment3._2.Models.User", "User")
-                        .WithMany("Record")
-                        .HasForeignKey("UserFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("moment3._2.Models.User", b =>
-                {
-                    b.Navigation("Record");
                 });
 #pragma warning restore 612, 618
         }

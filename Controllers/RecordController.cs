@@ -27,7 +27,7 @@ namespace moment3._2.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                records = records.Where(s => s.Artist.Contains(searchString));
+                records = records.Where(s => s.Artist.ToLower().Contains(searchString.ToLower()));
             }
 
             return View(await records.ToListAsync());
@@ -105,6 +105,7 @@ namespace moment3._2.Controllers
             {
                 try
                 {
+                    
                     _context.Update(@record);
                     await _context.SaveChangesAsync();
                 }

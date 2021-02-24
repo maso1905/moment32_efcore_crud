@@ -19,10 +19,17 @@ namespace moment3._2.Models
         [Display(Name = "Record")]
         public string RecordName { get; set; }
         public string Artist { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         [Display(Name = "Release")]
         public DateTime ReleaseDate { get; set; }
+
         [Display(Name = "Rented")]
         public bool IsRented { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         [Display(Name = "Was rented")]
         public DateTime RentDate { get; set; }
     }
